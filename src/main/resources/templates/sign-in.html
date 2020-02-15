@@ -3,19 +3,19 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Socio Commune</title>
+<title>SocioCommune</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="" />
 <meta name="keywords" content="" />
-<link rel="stylesheet" type="text/css" href="../static/css/animate.css">
-<link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="../static/css/line-awesome.css">
-<link rel="stylesheet" type="text/css" href="../static/css/line-awesome-font-awesome.min.css">
-<link rel="stylesheet" type="text/css" href="../static/css/font-awesome.min.css">
-<link rel="stylesheet" type="text/css" href="../static/lib/slick/slick.css">
-<link rel="stylesheet" type="text/css" href="../static/lib/slick/slick-theme.css">
-<link rel="stylesheet" type="text/css" href="../static/css/style.css">
-<link rel="stylesheet" type="text/css" href="../static/css/responsive.css">
+<link rel="stylesheet" type="text/css" href="css/animate.css">
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="css/line-awesome.css">
+<link rel="stylesheet" type="text/css" href="css/line-awesome-font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="lib/slick/slick.css">
+<link rel="stylesheet" type="text/css" href="lib/slick/slick-theme.css">
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="css/responsive.css">
 </head>
 
 
@@ -32,10 +32,9 @@
 						<div class="col-lg-6">
 							<div class="cmp-info">
 								<div class="cm-logo">
-									<img src="../static/images/cm-logo.png" alt="">
-									<p>Workwise,  is a global freelancing platform and social networking where businesses and independent professionals connect and collaborate remotely</p>
-								</div><!--cm-logo end-->	
-								<img src="../static/images/cm-main-img.png" alt="">			
+									<img src="images/cm-logo.png" alt="">
+									<p>SocioCommune is an Online Social website to enable alumni to interact with existing students to share their experience and Knowledge</p>
+								</div><!--cm-logo end-->				
 							</div><!--cmp-info end-->
 						</div>
 						<div class="col-lg-6">
@@ -88,15 +87,14 @@
 								</div><!--sign_in_sec end-->
 								<div class="sign_in_sec" id="tab-2">
 									<div class="signup-tab">
-										<i class="fa fa-long-arrow-left"></i>
-										<h2>johndoe@example.com</h2>
 										<ul>
-											<li data-tab="tab-3" class="current"><a href="#" title="">User</a></li>
-											<li data-tab="tab-4"><a href="#" title="">Company</a></li>
+											<li data-tab="tab-3" class="current"><a href="#" title="">Student</a></li>
+											<li data-tab="tab-4" ><a href="#" title="">Faculty</a></li>
+											<li data-tab="tab-5"><a href="#" title="">Alumni</a></li>
 										</ul>
 									</div><!--signup-tab end-->	
 									<div class="dff-tab current" id="tab-3">
-										<form>
+										<form action="profile" method="post">
 											<div class="row">
 												<div class="col-lg-12 no-pdd">
 													<div class="sn-field">
@@ -106,16 +104,40 @@
 												</div>
 												<div class="col-lg-12 no-pdd">
 													<div class="sn-field">
-														<input type="text" name="country" placeholder="Country">
-														<i class="la la-globe"></i>
+														<input type="email" name="email" placeholder="E-Mail">
+														<i class="la la-mail-forward"></i>
 													</div>
 												</div>
 												<div class="col-lg-12 no-pdd">
 													<div class="sn-field">
-														<select>
-															<option>Category</option>
+														<input type="text" name="phone" placeholder="Phone">
+														<i class="la la-mobile-phone"></i>
+													</div>
+												</div>													
+												<div class="col-lg-12 no-pdd">
+													<div class="sn-field">
+														<select name="branch">
+															<option selected="selected" hidden="true">Branch</option>
+															<option value="CS">Computer Science</option>
+															<option value="IT">Information Technology</option>
+															<option value="ME">Mechanical</option>
+															<option value="EC">Electronics and Communication</option>
+															<option value="EN">Electrical</option>
 														</select>
-														<i class="la la-dropbox"></i>
+														<i class="la la-tree"></i>
+														<span><i class="fa fa-ellipsis-h"></i></span>
+													</div>
+												</div>
+												<div class="col-lg-12 no-pdd">
+													<div class="sn-field">
+														<select name="batch">
+															<option selected="selected" hidden="true">Batch</option>
+															<option value="2016">2016</option>
+															<option value="2017">2017</option>
+															<option value="2018">2018</option>
+															<option value="2019">2019</option>
+														</select>
+														<i class="la la-calendar"></i>
 														<span><i class="fa fa-ellipsis-h"></i></span>
 													</div>
 												</div>
@@ -125,12 +147,7 @@
 														<i class="la la-lock"></i>
 													</div>
 												</div>
-												<div class="col-lg-12 no-pdd">
-													<div class="sn-field">
-														<input type="password" name="repeat-password" placeholder="Repeat Password">
-														<i class="la la-lock"></i>
-													</div>
-												</div>
+												
 												<div class="col-lg-12 no-pdd">
 													<div class="checky-sec st2">
 														<div class="fgt-sec">
@@ -138,7 +155,7 @@
 															<label for="c2">
 																<span></span>
 															</label>
-															<small>Yes, I understand and agree to the workwise Terms & Conditions.</small>
+															<small>Yes, I understand and agree to the SocioCommune Terms & Conditions.</small>
 														</div><!--fgt-sec end-->
 													</div>
 												</div>
@@ -153,14 +170,40 @@
 											<div class="row">
 												<div class="col-lg-12 no-pdd">
 													<div class="sn-field">
-														<input type="text" name="company-name" placeholder="Company Name">
-														<i class="la la-building"></i>
+														<input type="text" name="name" placeholder="Full Name">
+														<i class="la la-user"></i>
 													</div>
 												</div>
 												<div class="col-lg-12 no-pdd">
 													<div class="sn-field">
-														<input type="text" name="country" placeholder="Country">
-														<i class="la la-globe"></i>
+														<input type="email" name="email" placeholder="E-Mail">
+														<i class="la la-mail-forward"></i>
+													</div>
+												</div>		
+												<div class="col-lg-12 no-pdd">
+													<div class="sn-field">
+														<input type="text" name="phone" placeholder="Phone">
+														<i class="la la-mobile-phone"></i>
+													</div>
+												</div>										
+												<div class="col-lg-12 no-pdd">
+													<div class="sn-field">
+														<select name="branch">
+															<option selected="selected" hidden="true">Branch</option>
+															<option value="CS">Computer Science</option>
+															<option value="IT">Information Technology</option>
+															<option value="ME">Mechanical</option>
+															<option value="EC">Electronics and Communication</option>
+															<option value="EN">Electrical</option>
+														</select>
+														<i class="la la-tree"></i>
+														<span><i class="fa fa-ellipsis-h"></i></span>
+													</div>
+												</div>
+												<div class="col-lg-12 no-pdd">
+													<div class="sn-field">
+														<input type="text" name="years" placeholder="Worked for years...">
+														<i class="la la-calendar-check-o"></i>
 													</div>
 												</div>
 												<div class="col-lg-12 no-pdd">
@@ -169,20 +212,15 @@
 														<i class="la la-lock"></i>
 													</div>
 												</div>
-												<div class="col-lg-12 no-pdd">
-													<div class="sn-field">
-														<input type="password" name="repeat-password" placeholder="Repeat Password">
-														<i class="la la-lock"></i>
-													</div>
-												</div>
+												
 												<div class="col-lg-12 no-pdd">
 													<div class="checky-sec st2">
 														<div class="fgt-sec">
-															<input type="checkbox" name="cc" id="c3">
-															<label for="c3">
+															<input type="checkbox" name="cc" id="c2">
+															<label for="c2">
 																<span></span>
 															</label>
-															<small>Yes, I understand and agree to the workwise Terms & Conditions.</small>
+															<small>Yes, I understand and agree to the SocioCommune Terms & Conditions.</small>
 														</div><!--fgt-sec end-->
 													</div>
 												</div>
@@ -192,12 +230,77 @@
 											</div>
 										</form>
 									</div><!--dff-tab end-->
+									<div class="dff-tab" id="tab-5">
+										<form>
+											<div class="row">
+												<div class="col-lg-12 no-pdd">
+													<div class="sn-field">
+														<input type="text" name="name" placeholder="Full Name">
+														<i class="la la-user"></i>
+													</div>
+												</div>
+												<div class="col-lg-12 no-pdd">
+													<div class="sn-field">
+														<input type="email" name="email" placeholder="E-Mail">
+														<i class="la la-mail-forward"></i>
+													</div>
+												</div>			
+												<div class="col-lg-12 no-pdd">
+													<div class="sn-field">
+														<input type="text" name="phone" placeholder="Phone">
+														<i class="la la-mobile-phone"></i>
+													</div>
+												</div>									
+												<div class="col-lg-12 no-pdd">
+													<div class="sn-field">
+														<input type="text" name="batch" placeholder="Batch">
+														<i class="la la-calendar-check-o"></i>
+													</div>
+												</div>
+												<div class="col-lg-12 no-pdd">
+													<div class="sn-field">
+														<input type="text" name="company" placeholder="Company Name">
+														<i class="la la-globe"></i>
+													</div>
+												</div>
+												<div class="col-lg-12 no-pdd">
+													<div class="sn-field">
+														<input type="text" name="years" placeholder="Worked for years...">
+														<i class="la la-calendar"></i>
+													</div>
+												</div>
+												<div class="col-lg-12 no-pdd">
+													<div class="sn-field">
+														<input type="password" name="password" placeholder="Password">
+														<i class="la la-lock"></i>
+													</div>
+												</div>
+												
+												<div class="col-lg-12 no-pdd">
+													<div class="checky-sec st2">
+														<div class="fgt-sec">
+															<input type="checkbox" name="cc" id="c2">
+															<label for="c2">
+																<span></span>
+															</label>
+															<small>Yes, I understand and agree to the SocioCommune Terms & Conditions.</small>
+														</div><!--fgt-sec end-->
+													</div>
+												</div>
+												<div class="col-lg-12 no-pdd">
+													<button type="submit" value="submit">Get Started</button>
+												</div>
+											</div>
+										</form>
+									</div><!--dff-tab end-->
+									
 								</div>		
 							</div><!--login-sec end-->
 						</div>
 					</div>		
 				</div><!--signin-pop end-->
-			</div><!--signin-popup end-->			
+			</div><!--signin-popup end-->
+			
 		</div><!--sign-in-page end-->
 
 
@@ -205,10 +308,10 @@
 
 
 
-<script type="text/javascript" src="../static/js/jquery.min.js"></script>
-<script type="text/javascript" src="../static/js/popper.js"></script>
-<script type="text/javascript" src="../static/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="../static/lib/slick/slick.min.js"></script>
-<script type="text/javascript" src="../static/js/script.js"></script>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/popper.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="lib/slick/slick.min.js"></script>
+<script type="text/javascript" src="js/script.js"></script>
 </body>
 </html>

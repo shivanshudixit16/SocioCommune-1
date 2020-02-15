@@ -1,4 +1,4 @@
-package com.sociocommune.entity;
+package com.sociocommune.model;
 
 import org.springframework.stereotype.Component;
 
