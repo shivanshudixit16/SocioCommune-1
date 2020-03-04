@@ -7,9 +7,4 @@ import com.sociocommune.model.User;
 
 public interface UserRepository extends MongoRepository<User, String>,UserRepositoryCustom {
 
-  public User findByFirstName(String firstName);
-  public List<User> findByLastName(String lastName);
-  
-  
-
 }

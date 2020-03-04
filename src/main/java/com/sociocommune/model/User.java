@@ -6,23 +6,27 @@ import org.springframework.data.annotation.Id;
 @Component
 public class User {
 	@Id
-	  public String id;
+	public String id;
+	public String name;
+	public String email;
+	public String password;
+	public String type;
 
-	  public String firstName;
-	  public String lastName;
-
-	  public User() {}
-
-	  public User(String firstName, String lastName) {
-	    this.firstName = firstName;
-	    this.lastName = lastName;
-	  }
-
-	  @Override
-	  public String toString() {
-	    return String.format(
-	        "User[id=%s, firstName='%s', lastName='%s']",
-	        id, firstName, lastName);
+	public User(String name, String email, String password,String type) {
+		super();
+		this.name = name;
+		this.email = email;
+		this.password = password;
+		this.type = type;
+	}
+	
+	public User() {}
+	
+	@Override
+	public String toString() {
+		return String.format(
+	        "User[id=%s, Name='%s', Email='%s', Password='%s', Type='%s']",
+	        id, name, email, password, type);
 	  }
 
 

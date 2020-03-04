@@ -1,7 +1,5 @@
 package com.sociocommune.repository;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -18,13 +16,14 @@ public class UserRepositoryImpl implements UserRepositoryCustom{
 	  }
 
 	@Override
-	public List<User> fetchUserByFNameAndLName(String FName, String Lname) {
+	public User fetchUserByEmail(String email) {
 		Query searchQuery = new Query(); 
-		searchQuery.addCriteria(Criteria.where("firstName").is(FName));
-		List<User> people = operations.find(searchQuery, User.class);
-		return people;
-		
+		searchQuery.addCriteria(Criteria.where("email").is(email));
+		User user = operations.findOne(searchQuery, User.class);
+		return user;
 	}
+
+
 
 
 }
