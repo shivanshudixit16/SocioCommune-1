@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.sociocommune.model.Student;
 import com.sociocommune.model.User;
 import com.sociocommune.repository.UserRepository;
 
@@ -35,15 +34,6 @@ public class WebController {
 		}
 	}
 
-	@ResponseBody
-	@PostMapping("/signin")
-	public String signin(@RequestParam(name = "username", required = false) String username,
-			@RequestParam(name = "password", required = false) String password,
-			Model model) {
-		
-		
-		return username+password;
-
-	}
+	
 
 }

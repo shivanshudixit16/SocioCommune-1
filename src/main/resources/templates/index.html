@@ -1,20 +1,21 @@
 
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-	<meta charset="UTF-8">
-	<title>SocioCommune</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="description" content="" />
-	<meta name="keywords" content="" />
-	<link rel="stylesheet" type="text/css" href="css/animate.css">
-	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="css/line-awesome.css">
-	<link rel="stylesheet" type="text/css" href="css/line-awesome-font-awesome.min.css">
-	<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
-	<link rel="stylesheet" type="text/css" href="lib/slick/slick.css">
-	<link rel="stylesheet" type="text/css" href="lib/slick/slick-theme.css">
-	<link rel="stylesheet" type="text/css" href="css/style.css">
-	<link rel="stylesheet" type="text/css" href="css/responsive.css">
+<meta charset="UTF-8">
+<title>SocioCommune</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<link rel="stylesheet" type="text/css" href="css/animate.css">
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="css/line-awesome.css">
+<link rel="stylesheet" type="text/css"
+	href="css/line-awesome-font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="lib/slick/slick.css">
+<link rel="stylesheet" type="text/css" href="lib/slick/slick-theme.css">
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="css/responsive.css">
 </head>
 
 
@@ -43,16 +44,16 @@
 							<div class="col-lg-6">
 								<div class="login-sec">
 									<ul class="sign-control">
-										<li data-tab="tab-1" ><a href="#" title="">Sign
-												in</a></li>
-										<li data-tab="tab-2" class="current"><a href="#" title="">Sign up</a></li>
+										<li data-tab="tab-1"><a href="#" title="">Sign in</a></li>
+										<li data-tab="tab-2" class="current"><a href="#" title="">Sign
+												up</a></li>
 									</ul>
 									<div class="sign_in_sec " id="tab-1">
 										<h3>Sign in</h3>
 										<form action="signin">
 											<div class="row">
-											<p th:if="${b == 'true'}">true</p>
-<!-- 											<p th:unless="${b == 'false'}">false</p> -->
+												<p th:if="${b == 'true'}">true</p>
+												<!--<p th:unless="${b == 'false'}">false</p> -->
 												<div class="col-lg-12 no-pdd">
 													<div class="sn-field">
 														<input type="text" name="username" placeholder="Username">
@@ -95,7 +96,8 @@
 									</div>
 									<!--sign_in_sec end-->
 									<div class="sign_in_sec current" id="tab-2">
-										<p>Email id already exists !!</p><br><br>
+										<p>Email id already exists !!</p>
+										<br> <br>
 										<div class="signup-tab">
 											<ul>
 												<li data-tab="tab-3"><a href="#" title="">Student</a></li>
@@ -275,9 +277,10 @@
 									</ul>
 									<div class="sign_in_sec current" id="tab-1">
 										<h3>Sign in</h3>
-										<p th:if="${signup == 'complete'}">Sign Up Complete !!</p><br><br>
+										<p th:if="${signup == 'complete'}">Sign Up Complete !!</p>
+										<br> <br>
 										<p th:if="${b == 'true'}">true</p>
-<!-- 										<p th:unless="${b == 'false'}">false</p> -->
+										<!-- 										<p th:unless="${b == 'false'}">false</p> -->
 										<form action="signin">
 											<div class="row">
 												<div class="col-lg-12 no-pdd">
