@@ -6,7 +6,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sociocommune.model.User;
 import com.sociocommune.repository.UserRepository;
@@ -24,14 +23,24 @@ public class WebController {
 			@RequestParam(name = "type", required = false) String type, Model model) {
 
 		User user = new User(name, email, password, type);
+		String attributeName,attributeValue;
+		
 		if (repository.fetchUserByEmail(email) == null) {
 			repository.save(user);
-			model.addAttribute("signup", "complete");
-			return "index";
+			attributeName="signup";
+			attributeValue="complete";			
 		} else {
-			model.addAttribute("emailexists", "true");
-			return "index";
+			attributeName="emailexists";
+			attributeValue="true";			
 		}
+		model.addAttribute(attributeName, attributeValue);
+		return "index";
+	}
+	
+	@GetMapping("/signup")
+	public String signup() {
+		return "index";
+		
 	}
 
 	
