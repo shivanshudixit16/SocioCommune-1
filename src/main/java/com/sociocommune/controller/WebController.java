@@ -44,7 +44,7 @@ public class WebController {
 		
 	}
 	
-	@PostMapping("/signin")
+	@PostMapping("/profile")
 	public String signin(@RequestParam(name = "username", required = false) String username,
 			@RequestParam(name = "password", required = false) String password, Model model) {
 		User user = repository.fetchUserByEmail(username);
