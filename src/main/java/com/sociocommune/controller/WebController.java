@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sociocommune.model.User;
 import com.sociocommune.repository.UserRepository;
@@ -40,6 +41,23 @@ public class WebController {
 	@GetMapping("/signup")
 	public String signup() {
 		return "index";
+		
+	}
+	
+	@PostMapping("/signin")
+	public String signin(@RequestParam(name = "username", required = false) String username,
+			@RequestParam(name = "password", required = false) String password, Model model) {
+		User user = repository.fetchUserByEmail(username);
+		if (user == null) {
+			model.addAttribute("signin","failed");
+			return "index";			
+		} else {
+			if(password.equals(user.password))
+				return "profile";
+			else
+				model.addAttribute("signin","failed");
+				return "index";
+		}
 		
 	}
 
