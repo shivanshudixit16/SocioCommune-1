@@ -1,5 +1,9 @@
 package com.sociocommune.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,6 +12,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+import com.soccom.data.DataCon;
 import com.sociocommune.model.User;
 import com.sociocommune.repository.UserRepository;
 
@@ -61,6 +68,12 @@ public class WebController {
 		
 	}
 
-	
+	@GetMapping(value="/search")
+	   public String Search(@RequestParam(name="search", required=false) String str,Model model)
+	   {
+		    List<User> users=repository.findUsers(str);
+			System.out.println(users);
+			return "search";
+	   }
 
 }
