@@ -11,22 +11,32 @@ public class User {
 	public String email;
 	public String password;
 	public String type;
-
-	public User(String name, String email, String password,String type) {
+	public String[] followers;
+	public String[] following;
+	public int followingcount;
+	public int followercount;
+	
+	
+	public User(String name, String email, String password, String type, String[] followers, String[] following,
+			int followingcount, int followercount) {
 		super();
 		this.name = name;
 		this.email = email;
 		this.password = password;
 		this.type = type;
+		this.followers = followers;
+		this.following = following;
+		this.followingcount = followingcount;
+		this.followercount = followercount;
 	}
-	
+
 	public User() {}
 	
 	@Override
 	public String toString() {
 		return String.format(
-	        "User[id=%s, Name='%s', Email='%s', Password='%s', Type='%s']",
-	        id, name, email, password, type);
+	        "User[id=%s, Name='%s', Email='%s', Password='%s', Type='%s' Followers='%d' , Following='%d' ]",
+	        id, name, email, password, type,followercount,followercount);
 	  }
 
 

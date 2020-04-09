@@ -9,4 +9,30 @@ Developing a **Collaboration Web Application using Java, SpringMVC and ThymeLeaf
 
 ### Functionalities:
 
+#SignUp
 
+- name
+- email
+- type
+- password
+
+#SignIn
+
+- username
+- password
+- Session Management
+
+#Profile
+
+- followers
+- following
+- connections
+- edit
+- feeds
+- messages
+- search
+- type
+	- student
+	- faculty
+	- alumni
+		- job/internship post

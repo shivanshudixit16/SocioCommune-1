@@ -1,20 +1,14 @@
 package com.sociocommune.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
-import com.soccom.data.DataCon;
 import com.sociocommune.model.User;
 import com.sociocommune.repository.UserRepository;
 
@@ -30,7 +24,7 @@ public class WebController {
 			@RequestParam(name = "password", required = false) String password,
 			@RequestParam(name = "type", required = false) String type, Model model) {
 
-		User user = new User(name, email, password, type);
+		User user = new User(name, email, password, type, null, null, 0, 0);
 		String attributeName,attributeValue;
 		
 		if (repository.fetchUserByEmail(email) == null) {
@@ -55,12 +49,16 @@ public class WebController {
 	public String signin(@RequestParam(name = "username", required = false) String username,
 			@RequestParam(name = "password", required = false) String password, Model model) {
 		User user = repository.fetchUserByEmail(username);
+		model.addAttribute("loggeduser",user);
 		if (user == null) {
 			model.addAttribute("signin","failed");
 			return "index";			
 		} else {
+			
 			if(password.equals(user.password))
+			{
 				return "profile";
+			}
 			else
 				model.addAttribute("signin","failed");
 				return "index";
@@ -71,9 +69,20 @@ public class WebController {
 	@GetMapping(value="/search")
 	   public String Search(@RequestParam(name="search", required=false) String str,Model model)
 	   {
-		    List<User> users=repository.findUsers(str);
+		    User user=(User)model.getAttribute("loggeduser");
+		    System.out.println(user);
+		    List<User> users=repository.findUsers(str,user);
+		    model.addAttribute("users", users);
 			System.out.println(users);
 			return "search";
 	   }
-
+	@PostMapping(value="/follow")
+	public String Follow(@RequestParam(name="id", required=false) String email,Model model)
+	{
+		User currnetuser=(User)model.getAttribute("loggeduser");
+		User user = repository.fetchUserByEmail(email);
+		user.followercount++;
+		currnetuser.followingcount++;
+		return "profile";
+	}
 }
