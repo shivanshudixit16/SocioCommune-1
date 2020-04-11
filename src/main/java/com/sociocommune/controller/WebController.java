@@ -80,7 +80,7 @@ public class WebController {
 	}
 
 	@GetMapping("/profile")
-	public String profile(Model model,@ModelAttribute("User") User user) {
+	public String profile(Model model,@ModelAttribute("user") User user) {
 		if (user == null) {
 			model.addAttribute("signin","failed");
 			return "index";			
@@ -109,9 +109,16 @@ public class WebController {
 		currnetuser.followingcount++;
 		return "profile";
 	}
+	@GetMapping(value="/logout")
+	public String Follow(@RequestParam(name="id", required=false) String email,Model model,@ModelAttribute("User") User user)
+	{
+		user = null;
+		return "index";
+	}
 	@ModelAttribute("user")
     public User user() {
         return new User();
 
-    }
+	}
+	
 }
