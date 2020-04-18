@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http//www.thymeleaf.org">
+<head>
+<title>Search Results</title></head>
+<body>
+<form>
+<div class="list-group" th:each="user:${users}">
+<p th:text="${user.name}"/>
+<button class="btn" type="submit" formmethod="post" name="id" formaction="follow" th:value="${user.email}">Follow</button>
+</div>
+</form>
+</body>
+</html>
