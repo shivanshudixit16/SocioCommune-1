@@ -1,9 +1,5 @@
 package com.sociocommune.controller;
-
 import java.util.List;
-
-import com.sociocommune.model.User;
-import com.sociocommune.repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,13 +10,22 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.sociocommune.model.User;
+import com.sociocommune.repository.UserRepository;
+import com.sociocommune.service.EmailService;
+
 @Controller
 @SessionAttributes("user")
 public class WebController {
 
 	@Autowired
 	private UserRepository repository;
+	
+	@Autowired
+	private EmailService emailService;
 
+	//emailService.sendMail(reciever's email,Subject ,Text);
+	
 	@PostMapping("/signup")
 	public String signup(@RequestParam(name = "name", required = false) String name,
 			@RequestParam(name = "email", required = false) String email,
