@@ -1,9 +1,5 @@
 package com.sociocommune.controller;
-
 import java.util.List;
-
-import com.sociocommune.model.User;
-import com.sociocommune.repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,20 +10,29 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.sociocommune.model.User;
+import com.sociocommune.repository.UserRepository;
+import com.sociocommune.service.EmailService;
+
 @Controller
 @SessionAttributes("user")
 public class WebController {
 
 	@Autowired
 	private UserRepository repository;
+	
+	@Autowired
+	private EmailService emailService;
 
+	//emailService.sendMail(reciever's email,Subject ,Text);
+	
 	@PostMapping("/signup")
 	public String signup(@RequestParam(name = "name", required = false) String name,
 			@RequestParam(name = "email", required = false) String email,
 			@RequestParam(name = "password", required = false) String password,
 			@RequestParam(name = "type", required = false) String type, Model model,@ModelAttribute("user") User user) {
 
-		User newuser=new User(name, email, password, type, null, null, 0, 0);
+		User newuser=new User(name, email, password, type, "", "", 0, 0);
 		String attributeName,attributeValue;
 		
 		if (repository.fetchUserByEmail(email) == null) {
@@ -50,9 +55,9 @@ public class WebController {
 	
 	@PostMapping("/profile")
 	public String signin(@RequestParam(name = "username", required = false) String username,
-			@RequestParam(name = "password", required = false) String password, Model model,@ModelAttribute("User") User user) {
+			@RequestParam(name = "password", required = false) String password, Model model,@ModelAttribute("user") User user) {
 		User tempuser;
-		if(user == null)
+		if(user == null || user.email==null)
 		{
 			tempuser = repository.fetchUserByEmail(username);
 		}
@@ -60,7 +65,6 @@ public class WebController {
 		{
 			return "profile";
 		}
-		model.addAttribute("loggeduser",user);
 		if (tempuser == null) {
 			model.addAttribute("signin","failed");
 			return "index";			
@@ -68,8 +72,8 @@ public class WebController {
 			
 			if(password.equals(tempuser.password))
 			{
-				user=tempuser;
-				model.addAttribute("loggeduser",user);
+				user.copy(tempuser);
+				System.out.println(user);
 				return "profile";
 			}
 			else
@@ -91,26 +95,31 @@ public class WebController {
 	}
 
 	@GetMapping(value="/search")
-	   public String Search(@RequestParam(name="search", required=false) String str,Model model)
+	   public String Search(@RequestParam(name="search", required=false) String str,Model model,@ModelAttribute("user") User user)
 	   {
-		    User user=(User)model.getAttribute("loggeduser");
+		    
 		    System.out.println(user);
 		    List<User> users=repository.findUsers(str,user);
 		    model.addAttribute("users", users);
-			System.out.println(users);
+//			System.out.println(users);
 			return "search";
 	   }
 	@PostMapping(value="/follow")
-	public String Follow(@RequestParam(name="id", required=false) String email,Model model)
+	public String Follow(@RequestParam(name="id", required=false) String email,Model model,@ModelAttribute("user") User user)
 	{
-		User currnetuser=(User)model.getAttribute("loggeduser");
-		User user = repository.fetchUserByEmail(email);
-		user.followercount++;
-		currnetuser.followingcount++;
+		User user1= repository.fetchUserByEmail(email);
+		System.out.println(user);
+		System.out.println(user1);
+		user1.followercount++;
+		user.followingcount++;
+		user1.followers=user1.followers +"," +user.email;
+		user.following=user.following +"," +user1.email;
+		repository.save(user);
+		repository.save(user1);
 		return "profile";
 	}
 	@GetMapping(value="/logout")
-	public String Follow(@RequestParam(name="id", required=false) String email,Model model,@ModelAttribute("User") User user)
+	public String Logout(@RequestParam(name="id", required=false) String email,Model model,@ModelAttribute("user") User user)
 	{
 		user = null;
 		return "index";
@@ -120,5 +129,4 @@ public class WebController {
         return new User();
 
 	}
-	
 }

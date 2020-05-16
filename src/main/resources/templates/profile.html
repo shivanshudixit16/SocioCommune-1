@@ -1,4 +1,5 @@
-<html><head>
+<html xmlns:th="http//www.thymeleaf.org">
+<head>
 <meta charset="UTF-8">
 <title>WorkWise Html Template</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -51,7 +52,7 @@
 					<div class="user-account">
 						<div class="user-info">
 							
-							<a href="#" title="">{User's Name}</a>
+							<a href="#" title="" th:text="${user.name}"></a>
 							<i class="la la-sort-down"></i>
 						</div>
 						<div class="user-account-settingss active">
@@ -98,11 +99,11 @@
 											<ul class="flw-status">
 												<li>
 													<span>Following</span>
-													<b>{Following}</b>
+													<b th:text="${user.followingcount}"></b>
 												</li>
 												<li>
 													<span>Followers</span>
-													<b>{Followers}</b>
+													<b th:text="${user.followercount}"></b>
 												</li>
 											</ul>
 										</div><!--user_pro_status end-->
@@ -126,9 +127,9 @@
 							<div class="col-lg-9">
 								<div class="main-ws-sec">
 									<div class="user-tab-sec">
-										<h3>{User's Name}</h3>
+										<h3 th:text="${user.name}"></h3>
 										<div class="star-descp">
-											<span>{User's Type}</span>
+											<span th:text="${user.type}"></span>
 											
 										</div><!--star-descp end-->
 										<div class="tab-feed">
@@ -161,7 +162,7 @@
 													<div class="usy-dt">
 														<img src="http://via.placeholder.com/50x50" alt="">
 														<div class="usy-name">
-															<h3>{User's Name}</h3>
+															<h3 th:text="${user.name}"></h3>
 															<span><img src="images/clock.png" alt="">3 min ago</span>
 														</div>
 													</div>

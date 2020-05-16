@@ -11,13 +11,13 @@ public class User {
 	public String email;
 	public String password;
 	public String type;
-	public String[] followers;
-	public String[] following;
+	public String followers;
+	public String following;
 	public int followingcount;
 	public int followercount;
 	
 	
-	public User(String name, String email, String password, String type, String[] followers, String[] following,
+	public User(String name, String email, String password, String type, String followers, String following,
 			int followingcount, int followercount) {
 		super();
 		this.name = name;
@@ -28,6 +28,20 @@ public class User {
 		this.following = following;
 		this.followingcount = followingcount;
 		this.followercount = followercount;
+	}
+	
+	
+	public void copy(User user)
+	{
+		this.id =user.id;
+		this.name=user.name;
+		this.email =user.email;
+		this.password =user.password;
+		this.type =user.type;
+		this.followers =user.followers;
+		this.following =user.following;
+		this.followercount =user.followercount;
+		this.followingcount =user.followingcount;
 	}
 
 	public User() {}
