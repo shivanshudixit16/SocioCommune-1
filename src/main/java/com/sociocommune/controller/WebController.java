@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import com.sociocommune.model.User;
-import com.sociocommune.repository.UserRepository;
+import com.sociocommune.model.*;
+import com.sociocommune.repository.*;
 import com.sociocommune.service.EmailService;
 
 @Controller
@@ -20,6 +20,9 @@ public class WebController {
 
 	@Autowired
 	private UserRepository repository;
+	
+	@Autowired
+	private JobPostRepository jobpostrepo;
 	
 	@Autowired
 	private EmailService emailService;
@@ -124,6 +127,23 @@ public class WebController {
 		user = null;
 		return "index";
 	}
+	@PostMapping("/postjob")
+	public String postjob(@RequestParam(name = "title", required = false) String title,
+			@RequestParam(name = "skills", required = false) String skills,
+			@RequestParam(name = "salary", required = false) String salary,
+			@RequestParam(name = "type", required = false) String type,
+			@RequestParam(name = "desription", required = false) String desription, Model model,@ModelAttribute("user") User user) {
+				
+				JobPost ps= new JobPost();
+				ps.title=title;
+				ps.skills=skills;
+				ps.salary=salary;
+				ps.type=type;
+				ps.description=desription;
+				ps.userEmail=user.email;
+				jobpostrepo.save(ps);
+				return "profile";
+			}
 	@ModelAttribute("user")
     public User user() {
         return new User();
