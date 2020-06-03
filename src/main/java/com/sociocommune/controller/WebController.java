@@ -40,6 +40,7 @@ public class WebController {
 		
 		if (repository.fetchUserByEmail(email) == null) {
 			repository.save(newuser);
+			emailService.sendMail(email, "Welcome "+ name , "Welcome to SRMS Connect" );
 			attributeName="signup";
 			attributeValue="complete";			
 		} else {
