@@ -13,11 +13,12 @@ public class JobPost {
 	public String description;
     public String type;
     public String userEmail;
+    public String userName;
     
 
 
     public JobPost() {}
-    public JobPost(String id, String title, String skills, String salary, String description, String type, String userEmail) {
+    public JobPost(String id, String userName,String title, String skills, String salary, String description, String type, String userEmail) {
 		this.id = id;
 		this.title = title;
 		this.skills = skills;
@@ -25,5 +26,6 @@ public class JobPost {
 		this.description = description;
         this.type = type;
         this.userEmail=userEmail;
+        this.userName=userName;
     }
 }
