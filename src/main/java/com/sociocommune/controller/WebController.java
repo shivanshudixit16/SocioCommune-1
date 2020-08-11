@@ -120,6 +120,15 @@ public class WebController {
 			{
 				user.copy(tempuser);
 				System.out.println(user);
+				String [] fol=user.following.split(",");
+				List <JobPost> ls= new ArrayList<JobPost>();
+				for(int i=1;i<fol.length;i++)
+				{
+					ls.addAll(jobpostrepo.fetchPostByEmail(fol[i]));
+				}
+				model.addAttribute("posts",ls);
+				model.addAttribute("loggeduser",user);
+				
 				return "profile";
 			}
 			else
@@ -135,6 +144,13 @@ public class WebController {
 			model.addAttribute("signin","failed");
 			return "index";			
 		} else {
+			String [] fol=user.following.split(",");
+			List <JobPost> ls= new ArrayList<JobPost>();
+			for(int i=1;i<fol.length;i++)
+			{
+				ls.addAll(jobpostrepo.fetchPostByEmail(fol[i]));
+			}
+			model.addAttribute("posts",ls);
 			model.addAttribute("loggeduser",user);
 			return "profile";
 		}
@@ -175,17 +191,18 @@ public class WebController {
 			@RequestParam(name = "skills", required = false) String skills,
 			@RequestParam(name = "salary", required = false) String salary,
 			@RequestParam(name = "type", required = false) String type,
-			@RequestParam(name = "desription", required = false) String desription, Model model,@ModelAttribute("user") User user) {
+			@RequestParam(name = "description", required = false) String description, Model model,@ModelAttribute("user") User user) {
 				
 				JobPost ps= new JobPost();
 				ps.title=title;
 				ps.skills=skills;
 				ps.salary=salary;
 				ps.type=type;
-				ps.description=desription;
+				ps.description=description;
 				ps.userEmail=user.email;
+				ps.userName=user.name;
 				jobpostrepo.save(ps);
-				return "profile";
+				return "redirect:profile";
 			}
 	@ModelAttribute("user")
     public User user() {

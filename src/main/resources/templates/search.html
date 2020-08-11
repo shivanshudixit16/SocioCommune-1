@@ -7,6 +7,7 @@
 <div class="list-group" th:each="user:${users}">
 <p th:text="${user.name}"/>
 <button class="btn" type="submit" formmethod="post" name="id" formaction="follow" th:value="${user.email}">Follow</button>
+<button class="btn" type="submit" formmethod="get" name="rec" formaction="chat" th:value="${user.email}">Chat</button>
 </div>
 </form>
 </body>
