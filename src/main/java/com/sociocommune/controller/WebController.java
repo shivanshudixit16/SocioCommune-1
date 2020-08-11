@@ -1,5 +1,5 @@
 package com.sociocommune.controller;
-import java.util.List;
+import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.sociocommune.model.*;
@@ -20,41 +21,82 @@ public class WebController {
 
 	@Autowired
 	private UserRepository repository;
-	
+
 	@Autowired
 	private JobPostRepository jobpostrepo;
-	
+
+	@Autowired
+	private ChatRepository chatrepo;
+
 	@Autowired
 	private EmailService emailService;
 
-	//emailService.sendMail(reciever's email,Subject ,Text);
-	
+	// emailService.sendMail(reciever's email,Subject ,Text);
+
 	@PostMapping("/signup")
 	public String signup(@RequestParam(name = "name", required = false) String name,
 			@RequestParam(name = "email", required = false) String email,
 			@RequestParam(name = "password", required = false) String password,
-			@RequestParam(name = "type", required = false) String type, Model model,@ModelAttribute("user") User user) {
+			@RequestParam(name = "type", required = false) String type, Model model,
+			@ModelAttribute("user") User user) {
 
-		User newuser=new User(name, email, password, type, "", "", 0, 0);
-		String attributeName,attributeValue;
-		
+		User newuser = new User(name, email, password, type, "", "", 0, 0);
+		String attributeName, attributeValue;
+
 		if (repository.fetchUserByEmail(email) == null) {
 			repository.save(newuser);
-			emailService.sendMail(email, "Welcome "+ name , "Welcome to SRMS Connect" );
-			attributeName="signup";
-			attributeValue="complete";			
+			emailService.sendMail(email, "Welcome " + name, "Welcome to SRMS Connect");
+			attributeName = "signup";
+			attributeValue = "complete";
 		} else {
-			attributeName="emailexists";
-			attributeValue="true";			
+			attributeName = "emailexists";
+			attributeValue = "true";
 		}
 		model.addAttribute(attributeName, attributeValue);
 		return "index";
 	}
-	
+
 	@GetMapping("/signup")
 	public String signup() {
 		return "index";
-		
+
+	}
+
+	@GetMapping("/chat")
+	public String chat(@RequestParam(name = "rec", required = false) String rec,Model model,@ModelAttribute("user") User user) {
+		model.addAttribute("rec_email", rec);
+		model.addAttribute("sen_email", user.email);
+		User tempuser = repository.fetchUserByEmail(rec);
+		System.out.println(tempuser.name);
+		model.addAttribute("rec_name", tempuser.name);
+		return "chat";
+	}
+
+	@GetMapping("/get-message")
+	@ResponseBody
+	public List<Chat> getMessage(@RequestParam(name = "sen", required = false) String sender,
+	@RequestParam(name = "rec", required = false) String receiver)
+	{
+		List <Chat> chats1=chatrepo.findChats(sender,receiver);
+		List <Chat> chats2=chatrepo.findChats(receiver,sender);
+		List<Chat> allChats = new ArrayList<Chat>();
+		allChats.addAll(chats1);
+		allChats.addAll(chats2);
+		return allChats;
+	}
+
+	@PostMapping("/save-message")
+	@ResponseBody
+	public String saveMessage(@RequestParam(name = "sen", required = false) String sender,
+	@RequestParam(name = "rec", required = false) String receiver,
+	@RequestParam(name = "msg", required = false) String msg)
+	{
+		System.out.println(sender);
+		System.out.println(receiver);
+		System.out.println(msg);
+		Chat ps= new Chat(sender,receiver,msg);
+		chatrepo.save(ps);
+		return "done";
 	}
 	
 	@PostMapping("/profile")

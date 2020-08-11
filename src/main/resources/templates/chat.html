@@ -1,0 +1,91 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" type="text/css" href="css/chat.css">
+</head>
+<div id="container">
+	<main>
+		<header>
+			<div>
+				<h2>Chat with <span th:text="${rec_name}"><spam></h2>
+			</div>
+		</header>
+		<ul id="chat">
+		</ul>
+		<footer>
+			<textarea placeholder="Type your message" id="msg"></textarea>
+			<a><button onclick="sendMessage()">Send</button></a>
+		</footer>
+	</main>
+</div>
+<p hidden id="rec_email" th:text="${rec_email}"></p>
+<p hidden id="sen_email" th:text="${sen_email}"></p>
+<script>
+	var recevier= document.getElementById("rec_email").innerHTML;
+    var sender= document.getElementById("sen_email").innerHTML;
+	var processedIds=[];
+
+    function sendMessage()
+    {
+        var http = new XMLHttpRequest();
+        var url = 'save-message/';
+        var msg=document.getElementById("msg").value
+        document.getElementById("msg").value=''
+        var params = '?sen='+sender+'&rec='+recevier+'&msg='+msg;
+        http.open('POST', url+params, true);
+		http.send(null);
+    }
+	function compare( a, b ) {
+		if ( a.time < b.time ){
+			return -1;
+		}
+		if ( a.time> b.time ){
+			return 1;
+		}
+		return 0;
+	}
+	function processMessages(arr)
+	{
+		arr.sort(compare);
+		arr=arr.filter(a => !processedIds.includes(a.id))
+		for(ele of arr)
+		{
+			console.log(ele)
+			var newchat=''
+			if (sender === ele.sender)
+			{
+				newchat='<li class="me"><div class="entete"><h3></h3><h2></h2><span class="status blue"></span></div><div class="message">'+ele.msg+'</div></li>'
+			}
+			else
+			{
+				newchat='<li class="you"><div class="entete"><h3></h3><h2></h2><span class="status green"></span></div><div class="triangle"></div><div class="message">'+ele.msg+'</div></li>'
+			}
+			document.getElementById("chat").innerHTML+=newchat
+			processedIds.push(ele.id)
+			var objDiv = document.getElementById("chat");
+			objDiv.scrollTop = objDiv.scrollHeight;
+		}
+	}
+	function pollMessage()
+	{
+		var xhttp = new XMLHttpRequest();
+		xhttp.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+			//console.log(JSON.parse(this.responseText));
+			processMessages(JSON.parse(this.responseText));
+			}
+		};
+		var url = 'get-message/';
+        var params = '?sen='+sender+'&rec='+recevier;
+        xhttp.open('GET', url+params, true);
+		xhttp.send();
+	}
+    setInterval(pollMessage,1000)
+
+	document.getElementById("msg").addEventListener("keyup", function(event) {
+    event.preventDefault();
+    if (event.keyCode === 13) {
+        sendMessage()
+    }
+	});
+</script>
+</html>
