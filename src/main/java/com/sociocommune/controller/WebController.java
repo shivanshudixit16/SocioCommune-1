@@ -204,6 +204,18 @@ public class WebController {
 				jobpostrepo.save(ps);
 				return "redirect:profile";
 			}
+	
+	@PostMapping("/fpassword")
+	public void ForgotPassword(@RequestParam(name = "email", required = true) String email)
+	{
+		User euser= repository.fetchUserByEmail(email);
+		
+		if(euser!=null)
+		{
+			emailService.sendMail(email, "Password","Dear"+euser.getName()+" , the Password for your account is "+euser.getPassword());
+		}
+	}
+	
 	@ModelAttribute("user")
     public User user() {
         return new User();
