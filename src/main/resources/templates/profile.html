@@ -52,7 +52,7 @@
 					<div class="user-account">
 						<div class="user-info">
 							
-							<a href="#" title="" th:text="${loggeduser.name}"></a>
+							<a href="#" title="" th:text="${user.name}"></a>
 							<i class="la la-sort-down"></i>
 						</div>
 						<div class="user-account-settingss active">
@@ -95,18 +95,18 @@
 												</div>
 											</div><!--username-dt end-->
 											<div class="user-specs">
-												<h3 th:text="${loggeduser.name}"></h3>
+												<h3 th:text="${user.name}"></h3>
 												<span th:text="${user.type}"></span>
 											</div>
 										</div><!--user-profile end-->
 										<ul class="user-fw-status">
 											<li>
 												<h4>Following</h4>
-												<span><b th:text="${loggeduser.followingcount}"></b></span>
+												<span><a href="/following"><b th:text="${user.followingcount}"></a></b></span>
 											</li>
 											<li>
 												<h4>Followers</h4>
-												<span><b th:text="${loggeduser.followercount}"></b></span>
+												<span><a href="/followers"><b th:text="${user.followercount}"></a></b></span>
 											</li>
 											<li>
 												<a href="#" title="">View Profile</a>
@@ -124,14 +124,6 @@
 												<div class="sgt-text">
 													<h4>Jessica William</h4>
 													<span>Graphic Designer</span>
-												</div>
-												<span><i class="la la-plus"></i></span>
-											</div>
-											<div class="suggestion-usd">
-												<img src="http://via.placeholder.com/35x35" alt="">
-												<div class="sgt-text">
-													<h4 th:text="${loggeduser.name}"></h4>
-													<span th:text="${loggeduser.type}"></span>
 												</div>
 												<span><i class="la la-plus"></i></span>
 											</div>
