@@ -109,7 +109,7 @@ public class WebController {
 		}
 		else
 		{
-			return "profile";
+			return "redirect:profile";
 		}
 		if (tempuser == null) {
 			model.addAttribute("signin","failed");
@@ -127,9 +127,8 @@ public class WebController {
 					ls.addAll(jobpostrepo.fetchPostByEmail(fol[i]));
 				}
 				model.addAttribute("posts",ls);
-				model.addAttribute("loggeduser",user);
 				
-				return "profile";
+				return "redirect:profile";
 			}
 			else
 				model.addAttribute("signin","failed");
@@ -151,7 +150,6 @@ public class WebController {
 				ls.addAll(jobpostrepo.fetchPostByEmail(fol[i]));
 			}
 			model.addAttribute("posts",ls);
-			model.addAttribute("loggeduser",user);
 			return "profile";
 		}
 	}
@@ -166,9 +164,47 @@ public class WebController {
 //			System.out.println(users);
 			return "search";
 	   }
+	   @GetMapping(value="/following")
+	   public String following(Model model,@ModelAttribute("user") User user)
+	   {
+		    
+			System.out.println(user);
+			List<User> followingUsers = new ArrayList<User>();
+			String [] following=user.following.split(",");			
+			for(int i=1;i<following.length;i++)
+			{
+				followingUsers.add(repository.fetchUserByEmail(following[i]));
+			}
+			model.addAttribute("folusers", followingUsers);
+			
+			model.addAttribute("type", "Following");
+//			System.out.println(users);
+			return "followers";
+	   }
+	   @GetMapping(value="/followers")
+	   public String followers(Model model,@ModelAttribute("user") User user)
+	   {
+		    
+			System.out.println(user);
+			List<User> followers = new ArrayList<User>();
+			String [] folow=user.followers.split(",");			
+			for(int i=1;i<folow.length;i++)
+			{
+				followers.add(repository.fetchUserByEmail(folow[i]));
+			}
+			model.addAttribute("folusers", followers);
+			model.addAttribute("type", "Followers");
+//			System.out.println(users);
+			return "followers";
+	   }
 	@PostMapping(value="/follow")
 	public String Follow(@RequestParam(name="id", required=false) String email,Model model,@ModelAttribute("user") User user)
 	{
+		String [] following=user.following.split(",");
+		if(Arrays.asList(following).contains(email))
+		{
+			return "profile";
+		}
 		User user1= repository.fetchUserByEmail(email);
 		System.out.println(user);
 		System.out.println(user1);
@@ -204,6 +240,18 @@ public class WebController {
 				jobpostrepo.save(ps);
 				return "redirect:profile";
 			}
+	
+	@PostMapping("/fpassword")
+	public void ForgotPassword(@RequestParam(name = "email", required = true) String email)
+	{
+		User euser= repository.fetchUserByEmail(email);
+		
+		if(euser!=null)
+		{
+			emailService.sendMail(email, "Password","Dear"+euser.getName()+" , the Password for your account is "+euser.getPassword());
+		}
+	}
+	
 	@ModelAttribute("user")
     public User user() {
         return new User();
