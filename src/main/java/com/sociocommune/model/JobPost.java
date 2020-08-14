@@ -14,11 +14,12 @@ public class JobPost {
     public String type;
     public String userEmail;
     public String userName;
+    public int likes;
     
 
 
     public JobPost() {}
-    public JobPost(String id, String userName,String title, String skills, String salary, String description, String type, String userEmail) {
+    public JobPost(String id, String userName,int likes,String title, String skills, String salary, String description, String type, String userEmail) {
 		this.id = id;
 		this.title = title;
 		this.skills = skills;
@@ -27,5 +28,6 @@ public class JobPost {
         this.type = type;
         this.userEmail=userEmail;
         this.userName=userName;
+        this.likes=likes;
     }
 }
