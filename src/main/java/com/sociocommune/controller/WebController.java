@@ -99,6 +99,23 @@ public class WebController {
 		return "done";
 	}
 	
+	@GetMapping("/update-like")
+	@ResponseBody
+	public String updateLike(@RequestParam(name = "id", required = false) String id)
+	{
+
+		Optional<JobPost> ps=jobpostrepo.findById(id);
+		if(ps.isPresent()) {
+			JobPost jb = ps.get();
+			jb.likes++;
+			jobpostrepo.save(jb);
+			return  ""+jb.likes;
+		}
+		return "";
+	}
+
+
+	
 	@PostMapping("/profile")
 	public String signin(@RequestParam(name = "username", required = false) String username,
 			@RequestParam(name = "password", required = false) String password, Model model,@ModelAttribute("user") User user) {
@@ -139,7 +156,7 @@ public class WebController {
 
 	@GetMapping("/profile")
 	public String profile(Model model,@ModelAttribute("user") User user) {
-		if (user == null) {
+		if (user == null || user.email==null) {
 			model.addAttribute("signin","failed");
 			return "index";			
 		} else {
@@ -237,6 +254,7 @@ public class WebController {
 				ps.description=description;
 				ps.userEmail=user.email;
 				ps.userName=user.name;
+				ps.likes=0;
 				jobpostrepo.save(ps);
 				return "redirect:profile";
 			}
