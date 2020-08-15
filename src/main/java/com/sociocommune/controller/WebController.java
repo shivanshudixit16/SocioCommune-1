@@ -47,8 +47,9 @@ public class WebController {
 			@RequestParam(name = "password", required = false) String password,
 			@RequestParam(name = "type", required = false) String type, Model model) {
 
-		System.out.println(type);
-		User newuser = new User(name, email, password, type, "", "", 0, 0);
+		String bpassword = Base64.getEncoder().encodeToString(password.getBytes());	
+
+		User newuser = new User(name, email, bpassword, type, "", "", 0, 0);
 		String attributeName, attributeValue;
 
 		if (repository.fetchUserByEmail(email) == null) {
