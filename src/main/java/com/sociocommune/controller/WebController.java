@@ -1,5 +1,9 @@
 package com.sociocommune.controller;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Base64;
+import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,8 +15,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import com.sociocommune.model.*;
-import com.sociocommune.repository.*;
+import com.sociocommune.model.Chat;
+import com.sociocommune.model.JobPost;
+import com.sociocommune.model.User;
+import com.sociocommune.repository.ChatRepository;
+import com.sociocommune.repository.JobPostRepository;
+import com.sociocommune.repository.UserRepository;
 import com.sociocommune.service.EmailService;
 
 @Controller
@@ -39,8 +47,10 @@ public class WebController {
 			@RequestParam(name = "password", required = false) String password,
 			@RequestParam(name = "type", required = false) String type, Model model,
 			@ModelAttribute("user") User user) {
+		
+		String bpassword = Base64.getEncoder().encodeToString(password.getBytes());	
 
-		User newuser = new User(name, email, password, type, "", "", 0, 0);
+		User newuser = new User(name, email, bpassword, type, "", "", 0, 0);
 		String attributeName, attributeValue;
 
 		if (repository.fetchUserByEmail(email) == null) {
@@ -120,6 +130,7 @@ public class WebController {
 	public String signin(@RequestParam(name = "username", required = false) String username,
 			@RequestParam(name = "password", required = false) String password, Model model,@ModelAttribute("user") User user) {
 		User tempuser;
+		String bpassword = Base64.getEncoder().encodeToString(password.getBytes());	
 		if(user == null || user.email==null)
 		{
 			tempuser = repository.fetchUserByEmail(username);
@@ -133,7 +144,7 @@ public class WebController {
 			return "index";			
 		} else {
 			
-			if(password.equals(tempuser.password))
+			if(bpassword.equals(tempuser.password))
 			{
 				user.copy(tempuser);
 				System.out.println(user);
@@ -266,7 +277,9 @@ public class WebController {
 		
 		if(euser!=null)
 		{
-			emailService.sendMail(email, "Password","Dear"+euser.getName()+" , the Password for your account is "+euser.getPassword());
+			String dpassword=Base64.getDecoder().decode(euser.getPassword()).toString();
+			
+			emailService.sendMail(email, "Password","Dear"+euser.getName()+" , the Password for your account is "+dpassword);
 		}
 	}
 	
