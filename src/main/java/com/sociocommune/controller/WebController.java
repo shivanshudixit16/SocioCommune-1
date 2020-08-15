@@ -243,7 +243,7 @@ public class WebController {
 	public String postjob(@RequestParam(name = "title", required = false) String title,
 			@RequestParam(name = "skills", required = false) String skills,
 			@RequestParam(name = "salary", required = false) String salary,
-			@RequestParam(name = "type", required = false) String type,
+			@RequestParam(name = "job_type", required = false) String type,
 			@RequestParam(name = "description", required = false) String description, Model model,@ModelAttribute("user") User user) {
 				
 				JobPost ps= new JobPost();
