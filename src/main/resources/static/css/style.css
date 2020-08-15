@@ -1283,6 +1283,7 @@ main {
 	color: #e44d3a;
 }
 .like-com li a i {
+	margin-left: 5px;
 	margin-right: 2px;
 	font-size: 17px;
 	position: relative;
@@ -1303,7 +1304,8 @@ main {
 	float: left;
 	text-align: center;
 	font-weight: 600;
-	margin-left: -25px;
+	margin-left: 0px;
+	margin-top: -3px;
 }
 .like-com li .com {
 	position: relative;
