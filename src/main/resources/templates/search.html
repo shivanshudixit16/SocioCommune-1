@@ -1,14 +1,107 @@
+
 <!DOCTYPE html>
 <html xmlns:th="http//www.thymeleaf.org">
 <head>
-<title>Search Results</title></head>
+<meta charset="UTF-8">
+<title>WorkWise Html Template</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<link rel="stylesheet" type="text/css" href="css/animate.css">
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="css/flatpickr.min.css">
+<link rel="stylesheet" type="text/css" href="css/line-awesome.css">
+<link rel="stylesheet" type="text/css" href="css/line-awesome-font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="lib/slick/slick.css">
+<link rel="stylesheet" type="text/css" href="lib/slick/slick-theme.css">
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="css/responsive.css">
+</head>
+
+
 <body>
-<form>
-<div class="list-group" th:each="user:${users}">
-<p th:text="${user.name}"/>
-<button class="btn" type="submit" formmethod="post" name="id" formaction="follow" th:value="${user.email}">Follow</button>
-<button class="btn" type="submit" formmethod="get" name="rec" formaction="chat" th:value="${user.email}">Chat</button>
-</div>
-</form>
+	
+
+	<div class="wrapper">
+		
+
+
+		<header>
+			<div class="container">
+				<div class="header-data">
+					<div>
+						<a href="index.html" title=""></a>
+					</div><!--logo end-->
+					<div class="search-bar">
+						<form action="search">
+							<input type="text" name="search" placeholder="Search...">
+							<button type="submit"><i class="la la-search"></i></button>
+						</form>
+					</div><!--search-bar end-->
+					
+					<div class="menu-btn">
+						<a href="#" title=""><i class="fa fa-bars"></i></a>
+					</div><!--menu-btn end-->
+					<div class="user-account">
+						<div class="user-info">
+							<img src="images/logo1.png" alt="" width=30 height=30>
+							<a href="#" title="" th:text="${user.name}">  </a>
+						</div>
+						<div class="user-account-settingss ">
+						
+							<ul class="us-links">
+								<li><a href="profile-account-setting.html" title="">Account Setting</a></li>
+								<li><a href="#" title="">Privacy</a></li>
+								<li><a href="#" title="">Faqs</a></li>
+								<li><a href="#" title="">Terms &amp; Conditions</a></li>
+							</ul>
+							<h3 class="tc"><a href="/logout" title="">Logout</a></h3>
+						</div><!--user-account-settingss end-->
+					</div>
+				</div><!--header-data end-->
+			</div>
+		</header>
+
+
+		<section class="companies-info">
+			<div class="container">
+				<div class="company-title">
+					<h3 >Search Results</h3>
+				</div><!--company-title end-->
+				<div class="companies-list">
+					<div class="row" >
+
+						<div class="col-lg-3 col-md-4 col-sm-6" th:each="user:${users}">
+							<div class="company_profile_info">
+								<div class="company-up-info">
+									<img src="images/logo1.png" alt="">
+									<h3 th:text="${user.name}"></h3>
+									<h4 th:text="${user.type}"></h4>
+									<ul>
+                                        <li><a th:href="@{'/follow?id=' + ${user.email}}" title="" class="follow">Follow</a></li>
+										<li><a th:href="@{'/chat?rec=' + ${user.email}}" title="" class="message-us"><i class="fa fa-envelope"></i></a></li>
+									</ul>
+								</div>
+							</div><!--company_profile_info end-->
+                        </div>
+                        
+					</div>
+				</div><!--companies-list end-->
+
+			</div>
+		</section><!--companies-info end-->
+
+
+	</div><!--theme-layout end-->
+
+
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/popper.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/flatpickr.min.js"></script>
+<script type="text/javascript" src="lib/slick/slick.min.js"></script>
+<script type="text/javascript" src="js/script.js"></script>
 </body>
 </html>

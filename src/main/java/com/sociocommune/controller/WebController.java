@@ -45,12 +45,10 @@ public class WebController {
 	public String signup(@RequestParam(name = "name", required = false) String name,
 			@RequestParam(name = "email", required = false) String email,
 			@RequestParam(name = "password", required = false) String password,
-			@RequestParam(name = "type", required = false) String type, Model model,
-			@ModelAttribute("user") User user) {
-		
-		String bpassword = Base64.getEncoder().encodeToString(password.getBytes());	
+			@RequestParam(name = "type", required = false) String type, Model model) {
 
-		User newuser = new User(name, email, bpassword, type, "", "", 0, 0);
+		System.out.println(type);
+		User newuser = new User(name, email, password, type, "", "", 0, 0);
 		String attributeName, attributeValue;
 
 		if (repository.fetchUserByEmail(email) == null) {
@@ -171,6 +169,7 @@ public class WebController {
 			model.addAttribute("signin","failed");
 			return "index";			
 		} else {
+			System.out.println(user.following);
 			String [] fol=user.following.split(",");
 			List <JobPost> ls= new ArrayList<JobPost>();
 			for(int i=1;i<fol.length;i++)
@@ -225,7 +224,7 @@ public class WebController {
 //			System.out.println(users);
 			return "followers";
 	   }
-	@PostMapping(value="/follow")
+	@GetMapping(value="/follow")
 	public String Follow(@RequestParam(name="id", required=false) String email,Model model,@ModelAttribute("user") User user)
 	{
 		String [] following=user.following.split(",");
