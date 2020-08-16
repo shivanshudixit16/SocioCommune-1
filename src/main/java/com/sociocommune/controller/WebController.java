@@ -40,6 +40,13 @@ public class WebController {
 	private EmailService emailService;
 
 	// emailService.sendMail(reciever's email,Subject ,Text);
+	
+	
+	@GetMapping("/fpass")
+	public String fpass()
+	{
+		return "fpass";
+	}
 
 	@PostMapping("/signup")
 	public String signup(@RequestParam(name = "name", required = false) String name,
