@@ -30,8 +30,8 @@
 		<header>
 			<div class="container">
 				<div class="header-data">
-					<div class="logo">
-						<a href="index.html" title=""><img src="images/logo.png" alt=""></a>
+					<div>
+						<a href="index.html" title=""></a>
 					</div><!--logo end-->
 					<div class="search-bar">
 						<form action="search">
@@ -39,32 +39,17 @@
 							<button type="submit"><i class="la la-search"></i></button>
 						</form>
 					</div><!--search-bar end-->
-					<nav>
-						<ul>
-							
-							
-							
-							
-							
-							
-							
-						</ul>
-					</nav><!--nav end-->
+					
 					<div class="menu-btn">
 						<a href="#" title=""><i class="fa fa-bars"></i></a>
 					</div><!--menu-btn end-->
 					<div class="user-account">
 						<div class="user-info">
-							
-							<a href="#" title="" th:text="${user.name}"></a>
-							<i class="la la-sort-down"></i>
+							<img src="images/logo1.png" alt="" width=30 height=30>
+							<a href="#" title="" th:text="${user.name}">  </a>
 						</div>
-						<div class="user-account-settingss active">
-							
-							
-							
-							
-							
+						<div class="user-account-settingss ">
+						
 							<ul class="us-links">
 								<li><a href="profile-account-setting.html" title="">Account Setting</a></li>
 								<li><a href="#" title="">Privacy</a></li>
@@ -76,7 +61,7 @@
 					</div>
 				</div><!--header-data end-->
 			</div>
-		</header><!--header end-->
+		</header>
 
 
 		<section class="companies-info">
@@ -90,7 +75,7 @@
 						<div class="col-lg-3 col-md-4 col-sm-6" th:each="foluser:${folusers}">
 							<div class="company_profile_info">
 								<div class="company-up-info">
-									<img src="http://via.placeholder.com/90x90" alt="">
+									<img src="images/logo1.png" alt="">
 									<h3 th:text="${foluser.name}"></h3>
 									<h4 th:text="${foluser.type}"></h4>
 									<ul>
