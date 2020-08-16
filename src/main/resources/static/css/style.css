@@ -525,7 +525,7 @@ nav > ul > li > a:hover {
 
 .user-account {
 	float: right;
-	width: 110px;
+	width: auto;
 	border-left: 1px solid #dd3e2b;
 	border-right: 1px solid #dd3e2b;
 	box-sizing: border-box;
@@ -533,7 +533,7 @@ nav > ul > li > a:hover {
 }
 .user-info {
 	float: left;
-	width: 100%;
+	width: auto;
 	padding: 13px 10px;
 	position: relative;
 }
@@ -4712,8 +4712,9 @@ a:hover {
 }
 .usr-mg-info h3 {
 	color: #000000;
-	font-size: 18px;
+	font-size: 40px;
 	font-weight: 600;
+	padding-top: 5px;
 }
 .usr-mg-info p {
 	color: #686868;
@@ -4796,15 +4797,17 @@ a:hover {
 .main-message-box.ta-right .messg-usr-img {
 	left: auto;
 	right: 20px;
-	bottom: 25px;
+	bottom: 15px;
 }
 .main-message-box.ta-right .message-dt {
 	padding-left: 0;
 	padding-right: 85px;
+	float: right;
 }
 .main-message-box.ta-right .message-dt > span {
 	float: right;
 	width: auto;
+	
 }
 .message-inner-dt {
 	float: left;
@@ -4833,11 +4836,12 @@ a:hover {
 }
 .message-inner-dt > p {
 	float: right;
-	width: 60%;
+	min-width: auto;
+	max-width: 60%;
 	background-color: #e44d3a;
 	font-size: 14px;
 	line-height: 22px;
-	padding: 10px 35px 10px 35px;
+	padding: 10px 15px 10px 15px;
 	color: #fff;
 	-webkit-border-radius: 15px;
 	-moz-border-radius: 15px;
@@ -4886,7 +4890,7 @@ a:hover {
 }
 .mf-field input {
 	float: left;
-	width: 80%;
+	width: 70%;
 	background-color: #fff;
 	color: #b2b2b2;
 	font-size: 16px;
@@ -4905,6 +4909,13 @@ a:hover {
 	border: 0;
 	margin-left: 15px;
 	cursor: pointer;
+}
+.mf-field a {
+	float: left;
+	margin-top: 2px;
+	margin-left: 15px;
+	color: #e44d3a;
+	font-size: 45px;
 }
 .message-send-area form > ul {
 	float: left;
