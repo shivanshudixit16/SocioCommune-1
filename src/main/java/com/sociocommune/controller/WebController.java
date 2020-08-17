@@ -238,7 +238,7 @@ public class WebController {
 		String [] following=user.following.split(",");
 		if(Arrays.asList(following).contains(email))
 		{
-			return "profile";
+			return "redirect:profile";
 		}
 		User user1= repository.fetchUserByEmail(email);
 		System.out.println(user);
@@ -249,7 +249,7 @@ public class WebController {
 		user.following=user.following +"," +user1.email;
 		repository.save(user);
 		repository.save(user1);
-		return "profile";
+		return "redirect:profile";
 	}
 	@GetMapping(value="/logout")
 	public String Logout(@RequestParam(name="id", required=false) String email,Model model,@ModelAttribute("user") User user)
