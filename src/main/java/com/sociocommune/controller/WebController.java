@@ -278,16 +278,18 @@ public class WebController {
 			}
 	
 	@PostMapping("/fpassword")
-	public void ForgotPassword(@RequestParam(name = "email", required = true) String email)
+	public String ForgotPassword(@RequestParam(name = "email", required = true) String email,Model model)
 	{
 		User euser= repository.fetchUserByEmail(email);
-		
+		System.out.println(euser.password);
 		if(euser!=null)
 		{
-			String dpassword=Base64.getDecoder().decode(euser.getPassword()).toString();
-			
-			emailService.sendMail(email, "Password","Dear"+euser.getName()+" , the Password for your account is "+dpassword);
+			String dpassword=new String(Base64.getDecoder().decode(euser.password));
+			System.out.println(euser.password);
+			emailService.sendMail(email, "Password","Dear "+euser.getName()+" , the Password for your account is "+dpassword);
 		}
+		model.addAttribute("msg", "Password Sent To Your Mail Address");
+		return "fpass";
 	}
 	
 	@ModelAttribute("user")
