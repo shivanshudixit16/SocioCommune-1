@@ -49,7 +49,7 @@
 												up</a></li>
 									</ul>
 									<div class="sign_in_sec " id="tab-1">
-										<h3>Sign in</h3>
+										<h3>Enter Email</h3>
 										<form action="profile" method="post">
 											<div class="row">
 												<p th:if="${signin == 'failed'}">SignIn failed due to invalid username or password.</p>
@@ -63,22 +63,7 @@
 													</div>
 													<!--sn-field end-->
 												</div>
-												<div class="col-lg-12 no-pdd">
-													<div class="sn-field">
-														<input type="password" name="password"
-															placeholder="Password"> <i class="la la-lock"></i>
-													</div>
-												</div>
-												<div class="col-lg-12 no-pdd">
-													<div class="checky-sec">
-														<div class="fgt-sec">
-															<input type="checkbox" name="cc" id="c1"> <label
-																for="c1"> <span></span>
-															</label> <small>Remember me</small>
-														</div>
-														<!--fgt-sec end-->
-														<a href="/fpass" >Forgot Password?</a>
-													</div>
+												
 												</div>
 												<div class="col-lg-12 no-pdd">
 													<button type="submit" value="submit">Sign in</button>
@@ -307,7 +292,7 @@
 															</label> <small>Remember me</small>
 														</div>
 														<!--fgt-sec end-->
-														<a href="/fpass" title="">Forgot Password?</a>
+														<a href="#" title="">Forgot Password?</a>
 													</div>
 												</div>
 												<div class="col-lg-12 no-pdd">
@@ -378,9 +363,8 @@
 										</div>
 										<!--dff-tab end-->
 										<div class="dff-tab" id="tab-4">
-											
+											<input type="hidden" name="type" value="Faculty">
 											<form id="signup" method="post" action="signup">
-												<input type="hidden" name="type" value="Faculty">
 												<div class="row">
 													<div class="col-lg-12 no-pdd">
 														<div class="sn-field">
@@ -420,9 +404,8 @@
 										</div>
 										<!--dff-tab end-->
 										<div class="dff-tab" id="tab-5">
-											
+											<input type="hidden" name="type" value="Alumni">
 											<form id="signup" method="post" action="signup">
-												<input type="hidden" name="type" value="Alumni">
 												<div class="row">
 													<div class="col-lg-12 no-pdd">
 														<div class="sn-field">
